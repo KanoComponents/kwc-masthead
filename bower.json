@@ -1,0 +1,23 @@
+{
+  "name": "kwc-masthead",
+  "description": "The masthead and primary nav for all Kano properties",
+  "main": "kwc-masthead.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.9.0",
+    "iron-media-query": "^2.0.0",
+    "iron-flex-layout": "^2.0.0",
+    "kwc-style": "git@github.com:KanoComponents/kwc-style.git#v1.x",
+    "kwc-icons": "git@github.com:KanoComponents/kwc-icons"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  },
+  "resolutions": {
+    "iron-flex-layout": "^2.0.0",
+    "iron-icon": "^2.0.1",
+    "iron-iconset-svg": "^2.1.0"
+  }
+}

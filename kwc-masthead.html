@@ -1,0 +1,260 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-media-query/iron-media-query.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../kwc-style/kwc-style.html">
+<link rel="import" href="../kwc-icons/kwc-ui-icons.html">
+
+<!--
+`kwc-masthead`
+The masthead and primary nav for all Kano properties
+
+@demo demo/index.html
+-->
+
+<dom-module id="kwc-masthead">
+    <template>
+        <style>
+            :host {
+                background-color: white;
+                box-sizing: border-box;
+                display: block;
+                padding: 0 16px;
+                position: relative;
+                width: 100%;
+                z-index: 80;
+            }
+            :host * {
+                box-sizing: border-box;
+            }
+            :host .wrapper {
+                height: 100%;
+                margin: auto;
+                max-width: var(--layout-width, 1400px);
+            }
+            :host .overlay,
+            :host .menu-button,
+            :host .close-button {
+                display: none;
+            }
+            :host .wrapper {
+                @apply --layout-horizontal;
+                @apply --layout-center;
+                @apply --layout-justified;
+            }
+            :host .logo {
+                @apply --layout-horizontal;
+                @apply --layout-center;
+                min-width: 76px;
+            }
+            :host([compact]) .logo {
+                @apply --layout-flex;
+            }
+            :host .logo img {
+                flex: none;
+                height: auto;
+                max-width: 75px;
+                width: 100%;
+            }
+            :host .auxiliary {
+                @apply --layout-flex;
+            }
+            :host([wide]) .logo {
+                @apply --layout-start-justified;
+            }
+            :host([wide]) .main {
+                @apply --layout-flex-4;
+                @apply --layout-horizontal;
+                @apply --layout-center;
+                @apply --layout-start-justified;
+                padding-left: 32px;
+            }
+            :host .main .primary,
+            :host .main .secondary {
+                @apply --layout-flex;
+                @apply --layout-center;
+            }
+            :host([wide]) .main .primary,
+            :host([wide]) .main .secondary {
+                @apply --layout-horizontal;
+            }
+            :host([compact]) .main .primary,
+            :host([compact]) .main .secondary {
+                @apply --layout-vertical;
+            }
+            :host([wide]) .main .primary {
+                @apply --layout-start-justified;
+            }
+            :host([wide]) .main .secondary {
+                @apply --layout-end-justified;
+            }
+            :host .main .primary ::slotted(*),
+            :host .main .secondary ::slotted(*) {
+                @apply --layout-horizontal;
+                @apply --layout-center;
+                @apply --layout-start-justified;
+                font-family: var(--font-heading);
+            }
+            :host([wide]) .main .primary ::slotted(*),
+            :host([wide]) .main .secondary ::slotted(*) {
+                margin-right: 32px;
+            }
+            :host([compact]) .main .primary ::slotted(*),
+            :host([compact]) .main .secondary ::slotted(*) {
+                border-bottom: 1px solid var(--color-stone);
+                box-sizing: border-box;
+                font-size: 24px;
+                padding: 20px 30px;
+                width: 100%;
+            }
+            :host .main .primary ::slotted(a),
+            :host .main .secondary ::slotted(a) {
+                color: var(--color-stone);
+                font-weight: bold;
+                text-decoration: none;
+            }
+            :host .main .primary ::slotted(a:hover),
+            :host .main .secondary ::slotted(a:hover) {
+                color: var(--color-black);
+            }
+            :host([compact]) .logo {
+                @apply --layout-center-justified;
+            }
+            :host([compact]) .main {
+                background-color: white;
+                height: 100%;
+                left: 0;
+                opacity: 0;
+                position: fixed;
+                top: 0;
+                transform: translateX(-60vw);
+                transition: transform 0.3s ease;
+                width: 60vw;
+                z-index: 100;
+            }
+            :host([compact][open]) .main {
+                opacity: 1;
+                transform: translateX(0vw);
+            }
+            :host([compact][open]) .overlay {
+                background-color: rgba(0, 0, 0, 0.6);
+                cursor: pointer;
+                display: block;
+                height: 100%;
+                left: 0;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 90;
+            }
+            :host([compact]) .menu-button {
+                @apply --layout-flex;
+                @apply --layout-horizontal;
+                @apply --layout-center;
+                @apply --layout-justified;
+                appearance: none;
+                -webkit-appearance: none;
+                background-color: transparent;
+                border: 0;
+                cursor: pointer;
+                height: 100%;
+                min-width: 40px;
+                padding: 0;
+                width: 18px;
+            }
+            :host([compact]) .menu-button:focus,
+            :host([compact]) .close-button:focus {
+                outline: 0;
+            }
+            :host([compact]) .menu-button iron-icon {
+                height: auto;
+                max-width: 18px;
+                width: 100%;
+            }
+            :host([compact]) .close-button {
+                @apply --layout-flex;
+                @apply --layout-horizontal;
+                @apply --layout-center;
+                @apply --layout-justified;
+                background-color: white;
+                border: 0;
+                border-radius: 100%;
+                cursor: pointer;
+                display: block;
+                height: 30px;
+                left: calc(60% + 20px);
+                position: absolute;
+                top: 20px;
+                width: 30px;
+            }
+            :host([compact]) .close-button iron-icon {
+                color: var(--color-stone);
+                height: 12px;
+                width: 12px;
+            }
+        </style>
+        <iron-media-query query="(max-width: 768px)" query-matches="{{compact}}"></iron-media-query>
+        <iron-media-query query="(min-width: 768px)" query-matches="{{wide}}"></iron-media-query>
+        <nav id="navbar" class="wrapper">
+            <button class="menu-button" on-tap="_toggle">
+                <iron-icon icon="kwc-ui-icons:menu"></iron-icon>
+            </button>
+            <a class="logo" href="/">
+                <img src$="[[assetsPath]]/kano-logo.svg" alt="Kano Logo" />
+            </a>
+            <div class="overlay" on-tap="_toggle">
+                <button class="close-button">
+                    <iron-icon icon="kwc-ui-icons:close"></iron-icon>
+                </button>
+            </div>
+            <div class="main">
+                <div class="primary">
+                    <slot id="primary" name="primary"></slot>
+                </div>
+                <div class="secondary">
+                    <slot id="secondary" name="secondary"></slot>
+                </div>
+            </div>
+            <div class="auxiliary">
+                <slot id="tertiary" name="tertiary"></slot>
+            </div>
+        </nav>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'kwc-masthead',
+            properties: {
+                /** Path to the assets required by this components */
+                assetsPath: {
+                    type: String,
+                    value: '/assets'
+                },
+                /** Boolean to toggle the menu's compact state */
+                compact: {
+                    type: Boolean,
+                    reflectToAttribute: true,
+                    observer: '_collpase'
+                },
+                /** Boolean to toggle whether the compact menu is open */
+                open: {
+                    type: Boolean,
+                    value: false,
+                    reflectToAttribute: true
+                },
+                /** Boolean to toggle the menu's wide state */
+                wide: {
+                    type: Boolean,
+                    reflectToAttribute: true
+                }
+            },
+            /** Private property to force collapse the menu */
+            _collpase () {
+                this.open = false;
+            },
+            /** Private property to force toggle the menu open state */
+            _toggle () {
+                this.open = !this.open;
+            }
+        });
+    </script>
+</dom-module>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>kwc-masthead demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../kwc-masthead.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles"></style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container">
+      <h3>Basic kwc-masthead demo</h3>
+      <demo-snippet>
+        <template>
+          <kwc-masthead>
+              <a class="masthead-item selected" href="https://world.kano.me" title="Kano World" slot="primary">
+                <span class="masthead-label">World</span>
+              </a>
+              <a class="masthead-item" href="https://kano.me/store" title="Shop" slot="primary">
+                  <span class="masthead-label">Shop</span>
+              </a>
+          </kwc-masthead>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
