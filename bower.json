@@ -7,7 +7,8 @@
     "iron-media-query": "^2.0.0",
     "iron-flex-layout": "^2.0.0",
     "kwc-style": "git@github.com:KanoComponents/kwc-style.git#v1.x",
-    "kwc-icons": "git@github.com:KanoComponents/kwc-icons"
+    "kwc-icons": "git@github.com:KanoComponents/kwc-icons",
+    "iron-icon": "^2.0.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
