@@ -9,6 +9,11 @@
 `kwc-masthead`
 The masthead and primary nav for all Kano properties
 
+Custom property | Description | Default
+----------------|-------------|----------
+`--kwc-masthead-logo-max-width` | Maximum logo width | `104px`
+`--kwc-masthead-logo-min-width` | Minimum logo width | `104px`
+
 @demo demo/index.html
 -->
 
@@ -45,7 +50,8 @@ The masthead and primary nav for all Kano properties
             :host .logo {
                 @apply --layout-horizontal;
                 @apply --layout-center;
-                min-width: 76px;
+                max-width: var(--kwc-masthead-logo-max-width, 104px);
+                min-width: var(--kwc-masthead-logo-min-width, 104px);
             }
             :host([compact]) .logo {
                 @apply --layout-flex;
@@ -53,7 +59,7 @@ The masthead and primary nav for all Kano properties
             :host .logo img {
                 flex: none;
                 height: auto;
-                max-width: 75px;
+                max-width: 100%;
                 width: 100%;
             }
             :host .auxiliary {
