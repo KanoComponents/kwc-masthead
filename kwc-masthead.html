@@ -200,7 +200,7 @@ The masthead and primary nav for all Kano properties
                 <iron-icon icon="kwc-ui-icons:menu"></iron-icon>
             </button>
             <a class="logo" href="/">
-                <img src$="[[assetsPath]]/kano-logo.svg" alt="Kano Logo" />
+                <img src$="[[_logoUrl]]" alt="Kano Logo" />
             </a>
             <div class="overlay" on-tap="_toggle">
                 <button class="close-button">
@@ -246,6 +246,14 @@ The masthead and primary nav for all Kano properties
                 wide: {
                     type: Boolean,
                     reflectToAttribute: true
+                },
+                logoUrl: {
+                    type: String,
+                    value: null
+                },
+                _logoUrl: {
+                    type: String,
+                    computed: '_computeLogoUrl(assetsPath, logoUrl)'
                 }
             },
             /** Private property to force collapse the menu */
@@ -255,6 +263,14 @@ The masthead and primary nav for all Kano properties
             /** Private property to force toggle the menu open state */
             _toggle () {
                 this.open = !this.open;
+            },
+            _computeLogoUrl (assetsPath, logoUrl) {
+                // Prefer the `logoUrl` over `assetsPath`
+                if (logoUrl) {
+                    return logoUrl;
+                } else {
+                    return `${assetsPath}/kano-logo.svg`;
+                }
             }
         });
     </script>
